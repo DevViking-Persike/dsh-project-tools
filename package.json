@@ -71,8 +71,7 @@
     "prepare:local": "node scripts/prepare-local.mjs"
   },
   "dependencies": {
-    "zod": "^4.4.3",
-    "@persike/dsh-treadmill": "git+https://github.com/DevViking-Persike/dsh-treadmill.git#ff9776c8a9f6ba5169c445835e1aa58a03dacde8"
+    "zod": "^4.4.3"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "4.0.2",
@@ -88,7 +87,8 @@
     "@deepseek-ai/dsh-llm": "0.1.6-alpha.2",
     "@deepseek-ai/dsh-subprocess": "0.1.6-alpha.2",
     "@deepseek-ai/dsh-system-prompt": "0.1.6-alpha.2",
-    "@deepseek-ai/dsh-tools": "0.1.6-alpha.2"
+    "@deepseek-ai/dsh-tools": "0.1.6-alpha.2",
+    "@persike/dsh-treadmill": "0.1.0"
   },
   "devDependencies": {
     "typescript": "^6.0.3",

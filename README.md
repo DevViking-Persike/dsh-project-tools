@@ -4,7 +4,7 @@ Installable Docker services and model tools, plus Knowledge file-read and Treadm
 
 ## Composition
 
-The bundle inserts `njord-docker`, `njord-docker-local`, `njord-tool-docker` and `njord-project-controller`. The aggregate Njord profile disables the original `docker`, `docker-local`, `tool-docker` and `project-controller` entries before enabling these replacements. Mount each service once.
+The bundle inserts `njord-docker`, `njord-docker-local`, `njord-tool-docker` and `njord-project-controller`. Remove or disable the original `docker`, `docker-local`, `tool-docker` and `project-controller` entries before enabling these replacements. Mount each service once.
 
 The Host supplies Cordis, the Session controller, filesystem, sandbox policy, workspace registry, subprocess service, tools, system prompt and Typert registry. Docker uses the local CLI provider; engine inspection is enabled and model-facing Compose tools are disabled by default. Existing provider and tool configuration fields remain available on the corresponding plugin rows.
 
@@ -23,7 +23,7 @@ A Client bundle imports `@persike/dsh-project-tools/remote`, mounts it with `ctx
 | `@persike/dsh-project-tools/docker-local` | Local Docker CLI provider |
 | `@persike/dsh-project-tools/tool-docker` | Model-facing Docker tools |
 
-All Cordis and Harness imports remain external exact peer dependencies. Treadmill resolves from its pinned public Git commit, without requiring an npm publication. The package includes its own Docker implementation once and does not bundle a second Harness runtime. Browser code imports only `/types` and `/remote`.
+All Cordis and Harness imports remain external exact peer dependencies. Treadmill is a required semver peer: install its pinned Git commit as a direct profile dependency in the same operation as this package. Follow the complete pinned installation command and bundle-selection instructions in [DSH NJORD](https://github.com/DevViking-Persike/dsh-njord). Git URLs do not appear in transitive dependencies, so pnpm can retain its default `blockExoticSubdeps` protection. The package includes its own Docker implementation once and does not bundle a second Harness runtime. Browser code imports only `/types` and `/remote`.
 
 ## Development and release
 
