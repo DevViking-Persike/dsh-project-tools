@@ -1,6 +1,6 @@
 import type { Context } from '@deepseek-ai/cordis';
 import { type RemoteErrorCode } from '@deepseek-ai/dsh-typert-protocol';
-import { type FileSystem, type FsTarget } from '@deepseek-ai/dsh-fs';
+import type { FileSystem, FsTarget } from '@deepseek-ai/dsh-fs';
 import { type DockerContainer, type DockerImage } from '@persike/dsh-project-tools/docker';
 import type { SandboxExecutionPolicy } from '@deepseek-ai/dsh-sandbox';
 import type { SessionId } from '@deepseek-ai/dsh-session/types';

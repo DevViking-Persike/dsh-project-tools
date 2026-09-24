@@ -8,7 +8,7 @@ The bundle inserts `njord-docker`, `njord-docker-local`, `njord-tool-docker` and
 
 The Host supplies Cordis, the Session controller, filesystem, sandbox policy, workspace registry, subprocess service, tools, system prompt and Typert registry. Docker uses the local CLI provider; engine inspection is enabled and model-facing Compose tools are disabled by default. Existing provider and tool configuration fields remain available on the corresponding plugin rows.
 
-A Client bundle imports `@persike/dsh-project-tools/remote`, mounts it with `ctx.remote.$mount(contribution)`, and registers its returned disposer. The generated contribution exposes `docker`, `editor` and `treadmill` namespaces. The `editor` namespace contains file listing, file reading and language-server inventory; it has no write method. Treadmill APIs retain stage toggles and installation editing.
+A Client bundle imports `@persike/dsh-project-tools/remote`, mounts it with `ctx.remote.$mount(contribution)`, and registers its returned disposer. The generated contribution exposes `docker`, `editor` and `treadmill` namespaces. The `editor` namespace contains file listing, file reading and language-server inventory; it has no write method. Treadmill APIs retain stage toggles and installation editing. A project without `.spec/treadmill.yaml` uses the global stage table; its first stage toggle creates a project copy. Filesystem failures are classified by their stable SDK codes across source-launched Hosts and installed plugin artifacts. Permission, I/O and cancellation failures remain errors.
 
 ## Exports
 
@@ -36,7 +36,7 @@ npm pack
 
 The preparation script links peers from a matching built checkout without modifying it. Build first type-checks and emits ESM, then regenerates Host validators and the Client contribution from the checked source. Typert generation uses a private temporary workspace containing this package and the published protocol declarations; that workspace is removed after generation.
 
-The tracked `lib/` artifacts allow installation from the public Git repository without an install-time compiler or lifecycle build scripts. Run build and tests before committing a release so these artifacts match the source. Tests cover the generated API inventory and validation, Docker provider lifecycle, actual Treadmill stage updates, Docker CLI subprocess behavior and Docker model tools. They use temporary files and scripted executables; no live Docker daemon is required.
+The tracked `lib/` artifacts allow installation from the public Git repository without an install-time compiler or lifecycle build scripts. Run build and tests before committing a release so these artifacts match the source. Tests cover the generated API inventory and validation, Docker provider lifecycle, actual Treadmill stage updates and missing project-table fallback across SDK module instances, Docker CLI subprocess behavior and Docker model tools. They use temporary files and scripted executables; no live Docker daemon is required.
 
 ## Compatibility limits
 

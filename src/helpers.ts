@@ -4,7 +4,7 @@ import { basename, dirname, join } from 'node:path'
 import type {} from '@deepseek-ai/dsh-workspace'
 import type { Context } from '@deepseek-ai/cordis'
 import { RemoteError, remoteErrorOf, type RemoteErrorCode } from '@deepseek-ai/dsh-typert-protocol'
-import { FsError, type FileSystem, type FsTarget } from '@deepseek-ai/dsh-fs'
+import type { FileSystem, FsTarget } from '@deepseek-ai/dsh-fs'
 import { DockerError, type DockerContainer, type DockerImage } from '@persike/dsh-project-tools/docker'
 import { TreadmillError } from '@persike/dsh-treadmill'
 import type { SandboxExecutionPolicy } from '@deepseek-ai/dsh-sandbox'
@@ -166,6 +166,13 @@ export function treadmillError(error: unknown): ProjectFailure {
   return { code: 'gateway/internal', message: error instanceof Error ? error.message : String(error), details: {} }
 }
 
+/** SDK source and installed artifacts can have different error constructor identities. */
+function filesystemErrorCode(error: unknown): string | undefined {
+  return error instanceof Error && 'code' in error && typeof error.code === 'string'
+    ? error.code
+    : undefined
+}
+
 /**
  * Map one filesystem failure onto the editor's wire vocabulary. Each code is a
  * state the editor renders differently, so they stay distinct rather than
@@ -175,18 +182,19 @@ export function treadmillError(error: unknown): ProjectFailure {
  */
 export function editorError(error: unknown): ProjectFailure {
   if (remoteErrorOf(error)) throw error
-  const code = error instanceof FsError ? error.code : undefined
+  const code = filesystemErrorCode(error)
+  const message = error instanceof Error ? error.message : String(error)
   if (code === 'FS_STALE_VERSION') {
-    return { code: 'editor-stale', message: (error as FsError).message, details: {} }
+    return { code: 'editor-stale', message, details: {} }
   }
   if (code === 'FS_SANDBOX_DENIED' || code === 'FS_PERMISSION_DENIED') {
-    return { code: 'editor-denied', message: (error as FsError).message, details: {} }
+    return { code: 'editor-denied', message, details: {} }
   }
   if (code === 'FS_NOT_TEXT') {
-    return { code: 'editor-not-text', message: (error as FsError).message, details: {} }
+    return { code: 'editor-not-text', message, details: {} }
   }
   if (code === 'FS_TOO_LARGE') {
-    return { code: 'editor-too-large', message: (error as FsError).message, details: {} }
+    return { code: 'editor-too-large', message, details: {} }
   }
   if (error instanceof EditorOutsideWorkspace) {
     return { code: 'editor-denied', message: error.message, details: {} }
@@ -358,7 +366,7 @@ export async function projectTable(
   try {
     return { target, text: await fs.readText(target, signal) }
   } catch (error: unknown) {
-    if (error instanceof FsError && error.code === 'FS_NOT_FOUND') return undefined
+    if (filesystemErrorCode(error) === 'FS_NOT_FOUND') return undefined
     throw error
   }
 }

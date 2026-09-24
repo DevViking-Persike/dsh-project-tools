@@ -17,7 +17,7 @@ for (const entry of await readdir(join(harness, 'packages'), { withFileTypes: tr
 }
 for (const name of ['cordis', 'schemastery']) packages.set(`@deepseek-ai/${name}`, join(harness, 'vendor', name))
 packages.set('@persike/dsh-treadmill', resolve('../dsh-treadmill'))
-for (const [name, expected] of Object.entries({ ...manifest.peerDependencies, '@persike/dsh-treadmill': '0.1.0', '@deepseek-ai/dsh-typert-generator': '0.1.6-alpha.2', '@deepseek-ai/dsh-agent': '0.1.6-alpha.2', '@deepseek-ai/dsh-skill': '0.1.6-alpha.2', '@deepseek-ai/dsh-subprocess-local': '0.1.6-alpha.2' })) {
+for (const [name, expected] of Object.entries({ ...manifest.peerDependencies, '@persike/dsh-treadmill': '0.1.0', '@deepseek-ai/dsh-typert-generator': '0.1.6-alpha.2', '@deepseek-ai/dsh-agent': '0.1.6-alpha.2', '@deepseek-ai/dsh-skill': '0.1.6-alpha.2', '@deepseek-ai/dsh-subprocess-local': '0.1.6-alpha.2', '@deepseek-ai/dsh-fs-local': '0.1.6-alpha.2' })) {
   const target = packages.get(name)
   if (!target) throw new Error(`Missing Harness peer ${name}`)
   const actual = JSON.parse(await readFile(join(target, 'package.json'), 'utf8')).version
