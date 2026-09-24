@@ -1,0 +1,3 @@
+Derived from the Persike DeepSeek Harness checkout: packages/api/project-controller and packages/docker/{docker,docker-local,tool-docker}, based on aa5b22253569c633d574fd7c46e0acd17989c121 and its local Docker updates.
+Copyright (c) 2026 DeepSeek. Distributed under the included MIT License.
+Git controllers and editor write operations are excluded from this distribution.

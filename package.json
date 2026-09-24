@@ -1,0 +1,106 @@
+{
+  "name": "@persike/dsh-project-tools",
+  "version": "0.1.0",
+  "description": "Docker tools and Knowledge/Treadmill APIs for DeepSeek Harness",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./lib/types/index.js",
+  "types": "./lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/types/index.js"
+    },
+    "./types": {
+      "types": "./lib/types/types.d.ts",
+      "default": "./lib/types/types.js"
+    },
+    "./docker": {
+      "types": "./lib/types/docker/index.d.ts",
+      "default": "./lib/types/docker/index.js"
+    },
+    "./docker/types": {
+      "types": "./lib/types/docker/types.d.ts",
+      "default": "./lib/types/docker/types.js"
+    },
+    "./docker-local": {
+      "types": "./lib/types/docker-local/index.d.ts",
+      "default": "./lib/types/docker-local/index.js"
+    },
+    "./tool-docker": {
+      "types": "./lib/types/tool-docker/index.d.ts",
+      "default": "./lib/types/tool-docker/index.js"
+    },
+    "./typert": {
+      "types": "./lib/typert.host.d.ts",
+      "default": "./lib/typert.host.js"
+    },
+    "./remote": {
+      "types": "./lib/typert.remote-client.d.ts",
+      "default": "./lib/typert.remote-client.js"
+    },
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "lib/types",
+    "src",
+    "lib/typert.host.js",
+    "lib/typert.host.d.ts",
+    "lib/typert.remote-client.js",
+    "lib/typert.remote-client.d.ts",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/generate.mjs",
+    "test": "node --test tests/*.test.mjs && vitest run",
+    "prepare:local": "node scripts/prepare-local.mjs"
+  },
+  "dependencies": {
+    "zod": "^4.4.3",
+    "@persike/dsh-treadmill": "git+https://github.com/DevViking-Persike/dsh-treadmill.git#ff9776c8a9f6ba5169c445835e1aa58a03dacde8"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.2",
+    "@deepseek-ai/schemastery": "3.18.2",
+    "@deepseek-ai/dsh-api-session-controller": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-fs": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-lsp": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-sandbox": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-sandbox-policy": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-session": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-typert-protocol": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-workspace": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-llm": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-subprocess": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-system-prompt": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-tools": "0.1.6-alpha.2"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "@types/node": "^24.0.0",
+    "@deepseek-ai/dsh-typert-generator": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-agent": "0.1.6-alpha.2",
+    "@deepseek-ai/dsh-skill": "0.1.6-alpha.2",
+    "vitest": "^4.1.0",
+    "@deepseek-ai/dsh-subprocess-local": "0.1.6-alpha.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DevViking-Persike/dsh-project-tools.git"
+  }
+}

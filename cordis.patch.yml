@@ -1,0 +1,9 @@
+- insert:
+    - id: njord-docker
+      name: '@persike/dsh-project-tools/docker'
+    - id: njord-docker-local
+      name: '@persike/dsh-project-tools/docker-local'
+    - id: njord-tool-docker
+      name: '@persike/dsh-project-tools/tool-docker'
+    - id: njord-project-controller
+      name: '@persike/dsh-project-tools'
