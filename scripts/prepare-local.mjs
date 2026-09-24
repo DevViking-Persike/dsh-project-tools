@@ -25,7 +25,7 @@ for (const [name, expected] of Object.entries({ ...manifest.peerDependencies, '@
   await link(name, target)
 }
 for (const name of ['typescript', '@types/node', 'vitest']) await link(name, await realpath(join(harness, 'node_modules', name)))
-const fromOwner = createRequire(join(harness, 'packages/api/project-controller/package.json'))
+const fromOwner = createRequire(join(harness, 'packages/api/session-controller/package.json'))
 await link('zod', dirname(fromOwner.resolve('zod/package.json')))
 await mkdir('node_modules/.bin', { recursive: true })
 await symbolic('node_modules/.bin/tsc', resolve('node_modules/typescript/bin/tsc'))
